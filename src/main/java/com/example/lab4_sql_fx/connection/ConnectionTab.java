@@ -1,32 +1,28 @@
 package com.example.lab4_sql_fx.connection;
-
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+
 
 public class ConnectionTab extends Tab {
-
-    public ConnectionTab(String s, BorderPane borderPane, Label label, Button button) {
+    public ConnectionTab(String s) {
         super(s);
-        this.setContent(borderPane);
+        BorderPane pane = new BorderPane();
 
-        HBox hBox = new HBox(label);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(20));
+        //Top Layout
+        Label label = new Label(s);
+        StackPane topStackPane = new StackPane(label);
+        pane.setPadding(new Insets(10, 10, 10, 10));
+        topStackPane.setAlignment(Pos.CENTER);
+        pane.setTop(topStackPane);
 
-        // Pane Layout
-        borderPane.setTop(hBox);
+        //BorderPane Center Layout
+        InfoDataGrid infoDataGrid = new InfoDataGrid();
+        pane.setCenter(infoDataGrid);
 
-        borderPane.setCenter(button);
+
+        this.setContent(pane);
     }
-
-//    public void setLabelColor(Color labelColor) {
-//        this.labelColor = labelColor;
-//        label.setBackground(new Background(new BackgroundFill(this.labelColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//    }
 }
