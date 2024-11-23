@@ -1,13 +1,15 @@
 package com.example.lab4_sql_fx.connection;
+import com.example.lab4_sql_fx.SqlStuff;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.*;
 
 
 public class ConnectionTab extends Tab {
-    public ConnectionTab(String s) {
+    public ConnectionTab(String s, SqlStuff sqlStuff) {
         super(s);
         BorderPane pane = new BorderPane();
 
@@ -20,7 +22,11 @@ public class ConnectionTab extends Tab {
 
         //BorderPane Center Layout
         InfoDataGrid infoDataGrid = new InfoDataGrid();
-        pane.setCenter(infoDataGrid);
+        ConnectionButton connectionButton = new ConnectionButton(label, sqlStuff, infoDataGrid );
+        Button genericButton = new Button("Generic Connection");
+        VBox vbox = new VBox(infoDataGrid, genericButton, connectionButton);
+        pane.setCenter(vbox);
+
 
 
         this.setContent(pane);

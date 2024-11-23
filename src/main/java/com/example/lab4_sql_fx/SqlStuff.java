@@ -16,7 +16,6 @@ public class SqlStuff {
 
     // Status of the connection (true if connected, false otherwise)
     private boolean connectionStatus = false;
-    InfoDataGrid infoDataGrid = new InfoDataGrid();
 
     public void startConnection(String URL, String USERNAME, String PASS) throws SQLException {
         con = null; // Initialize connection to null

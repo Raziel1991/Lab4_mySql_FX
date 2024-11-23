@@ -22,7 +22,7 @@ public class DataBaseSQL extends Application {
         SqlStuff sqlStuff = new SqlStuff();
 
 
-        ConnectionTab connectionTab = new ConnectionTab("Connection");
+        ConnectionTab connectionTab = new ConnectionTab("Connection", sqlStuff);
         TabPane tabPane = new TabPane();
         tabPane.getTabs().add(connectionTab);
         Scene scene = new Scene(tabPane, 800, 800);
