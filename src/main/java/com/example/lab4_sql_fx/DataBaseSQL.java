@@ -3,6 +3,7 @@ package com.example.lab4_sql_fx;
 import com.example.lab4_sql_fx.connection.ConnectionButton;
 import com.example.lab4_sql_fx.connection.ConnectionTab;
 import com.example.lab4_sql_fx.connection.InfoDataGrid;
+import com.example.lab4_sql_fx.display.DisplayDataTab;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,10 +21,13 @@ public class DataBaseSQL extends Application {
         //Start DB connection
         Connection connection;
         SqlStuff sqlStuff = new SqlStuff();
+        connection = sqlStuff.getconnection();
 
 
         ConnectionTab connectionTab = new ConnectionTab("Connection", sqlStuff);
+        DisplayDataTab displayDataTab = new DisplayDataTab("Game Data");
         TabPane tabPane = new TabPane();
+        tabPane.getTabs().add(displayDataTab);
         tabPane.getTabs().add(connectionTab);
         Scene scene = new Scene(tabPane, 800, 800);
 
@@ -34,7 +38,7 @@ public class DataBaseSQL extends Application {
         stage.show();
 
 
-        //TODO:end connections
+        //TODO:end connections when closed
         sqlStuff.closeConnection();
     }
 
