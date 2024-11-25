@@ -24,11 +24,13 @@ public class DataBaseSQL extends Application {
         connection = sqlStuff.getconnection();
 
 
-        ConnectionTab connectionTab = new ConnectionTab("Connection", sqlStuff);
-        DisplayDataTab displayDataTab = new DisplayDataTab("Game Data");
+
         TabPane tabPane = new TabPane();
-        tabPane.getTabs().add(displayDataTab);
-        tabPane.getTabs().add(connectionTab);
+        ConnectionTab connectionTab = new ConnectionTab("Connection", sqlStuff);
+        DisplayDataTab displayDataTab = new DisplayDataTab("Display", sqlStuff);
+
+
+        tabPane.getTabs().addAll(connectionTab,displayDataTab );
         Scene scene = new Scene(tabPane, 800, 800);
 
 
