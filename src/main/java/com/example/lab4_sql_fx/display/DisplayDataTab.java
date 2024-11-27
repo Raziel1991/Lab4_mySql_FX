@@ -3,7 +3,6 @@ package com.example.lab4_sql_fx.display;
 import com.example.lab4_sql_fx.SqlStuff;
 import com.example.lab4_sql_fx.controllers.GameController;
 import com.example.lab4_sql_fx.models.Game;
-import com.example.lab4_sql_fx.models.Player;
 import com.example.lab4_sql_fx.models.PlayerAndGame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,6 +56,8 @@ public class DisplayDataTab extends Tab {
 
 
         this.setContent(borderPane);
+
+
     }
 
     /**
@@ -145,6 +146,5 @@ public class DisplayDataTab extends Tab {
 
         return vbox;
     }
-
 
 }

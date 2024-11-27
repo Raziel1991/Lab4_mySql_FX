@@ -26,6 +26,20 @@ public class Player {
         this.phone_number = new SimpleStringProperty(phone_number);
     }
 
+    public Player(String first_name, String last_name, String address, String postal_code, String province, String phone_number) {
+        if (first_name== null || first_name.trim().isEmpty()) throw new IllegalArgumentException("first_name cannot be null or empty");
+        if (last_name== null || last_name.trim().isEmpty()) throw new IllegalArgumentException("last_name cannot be null or empty");
+        this.player_id = null;
+        this.first_name = new SimpleStringProperty(first_name);
+        this.last_name = new SimpleStringProperty(last_name);
+        this.address = new SimpleStringProperty(address);
+        this.postal_code = new SimpleStringProperty(postal_code);
+        this.province = new SimpleStringProperty(province);
+        this.phone_number = new SimpleStringProperty(phone_number);
+    }
+
+
+
 
     public int getPlayer_id() {
         return player_id.get();

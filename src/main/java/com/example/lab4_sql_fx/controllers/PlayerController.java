@@ -10,31 +10,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PlayerControler {
+public class PlayerController {
     private final SqlStuff sqlStuff;
 
-    public PlayerControler(SqlStuff sqlStuff) {
+    public PlayerController(SqlStuff sqlStuff) {
         this.sqlStuff = sqlStuff;
     }
 
     //Insert a new game to the database
     public boolean insertPlayer(Player player) {
-        String sql = "insert into player (player_id, first_name, last_name, address, postal_code, province, phone_number) values(?,?,?,?,?,?,?)";
-        try (PreparedStatement pstmt = sqlStuff.getconnection().prepareStatement(sql)){
-            pstmt.setInt(1,player.getPlayer_id());
-            pstmt.setString(2,player.getFirst_name());
-            pstmt.setString(3,player.getLast_name());
-            pstmt.setString(4,player.getAddress());
-            pstmt.setString(5,player.getPostal_code());
-            pstmt.setString(6,player.getProvince());
-            pstmt.setString(7,player.getPhone_number());
+        String sql = "INSERT INTO player (first_name, last_name, address, postal_code, province, phone_number) VALUES(?,?,?,?,?,?)";
+
+        try (PreparedStatement pstmt = sqlStuff.getconnection().prepareStatement(sql)) {
+            pstmt.setString(1, player.getFirst_name());
+            pstmt.setString(2, player.getLast_name());
+            pstmt.setString(3, player.getAddress());
+            pstmt.setString(4, player.getPostal_code());
+            pstmt.setString(5, player.getProvince());
+            pstmt.setString(6, player.getPhone_number());
+
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
-            System.err.println("Error inserting game: " + e.getMessage());
+            System.err.println("Error inserting player: " + e.getMessage());
             return false;
         }
     }
+
 
     public boolean removePlayer(int playerId) {
         String sql = "delete from player where player_id = ?";
@@ -48,7 +50,7 @@ public class PlayerControler {
         }
     }
 
-    public ObservableList<Player> getAllGames() {
+    public ObservableList<Player> getAllPlayers() {
         ObservableList<Player> players = FXCollections.observableArrayList();
         String sql = "select * from player";
         try (Statement stmt = sqlStuff.getconnection().createStatement();
@@ -70,5 +72,27 @@ public class PlayerControler {
             throw new RuntimeException(e);
         }
         return players;
+    }
+
+    public boolean updatePlayer(Player player) {
+        try {
+            String sql = "UPDATE Player SET first_name=?, last_name=?, address=?, " +
+                    "postal_code=?, province=?, phone_number=? WHERE player_id=?";
+
+            PreparedStatement pstmt = sqlStuff.getconnection().prepareStatement(sql);
+            pstmt.setString(1, player.getFirst_name());
+            pstmt.setString(2, player.getLast_name());
+            pstmt.setString(3, player.getAddress());
+            pstmt.setString(4, player.getPostal_code());
+            pstmt.setString(5, player.getProvince());
+            pstmt.setString(6, player.getPhone_number());
+            pstmt.setInt(7, player.getPlayer_id());
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
